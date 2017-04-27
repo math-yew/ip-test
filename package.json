@@ -1,0 +1,23 @@
+{
+  "name": "ip-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ipTest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/math-yew/ip-test.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/math-yew/ip-test/issues"
+  },
+  "homepage": "https://github.com/math-yew/ip-test#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  }
+}
