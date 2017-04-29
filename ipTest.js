@@ -5,10 +5,18 @@ var exec = require('child_process').exec;
 
 var app = express();
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers","*");
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  next();
+ });
 
 
-  var myResult;
-app.get('/trigger', function (req, res) {
+  var myResult="";
+app.get('/client', function (req, res) {
 
   var child = exec("iperf3.exe -c 192.168.1.75", function (error, stdout, stderr) {
     console.log('stdout: ', stdout);
@@ -18,8 +26,23 @@ app.get('/trigger', function (req, res) {
       console.log('exec error: ' + error);
     }
   });
-  console.log('myResult: ', myResult);
-  res.status(200).json(myResult);
+
+  var count=0;
+  var watchResults = setInterval(function(){
+    count++;
+    console.log('waiting for results: ',count);
+    if(myResult){
+      console.log('myResult: ', myResult);
+      clearInterval(this);
+      res.status(200).json(myResult);
+    }
+    if(count>120){
+      console.log('timed out');
+      clearInterval(this);
+      res.status(400).json('Timed out');
+    }
+  },500)
+
 });
 
 app.listen(3002, function() {
