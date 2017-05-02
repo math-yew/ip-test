@@ -5,7 +5,11 @@
     {{test}}<br>
     {{ctrlTest}}<br>
     {{serviceTest}}<br>
-    {{testResults}}<br>
+    asdf<br>
+    <div ng-repeat="lines in testResults" style="list-style-type:none">
+      <p>{{lines}}</p>
+    </div>
+
     <button type="button" name="button" ng-click="startThisComputer()">This</button>
     <button type="button" name="button" ng-click="startThatComputer()">That</button>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
