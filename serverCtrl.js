@@ -28,13 +28,23 @@ module.exports = {
   storeResults: function (req, res) {
     var currentTime=new Date();
     console.log('currentTime: ', currentTime);
-  db.new_result(["1",req.body.results[1][0],req.body.results[1][1],req.body.results[1][2],"2",req.body.results[2][0],req.body.results[2][1],req.body.results[2][2], currentTime, "Other", "Other", false], function (err, results) {
-    if(err){
-      console.error(err);
-      return res.send(err);
-    }
-    return res.send(results);
-  })
-  }
+    db.new_result(["1",req.body.results[1][0],req.body.results[1][1],req.body.results[1][2],"2",req.body.results[2][0],req.body.results[2][1],req.body.results[2][2], currentTime, "Other", "Other", false], function (err, results) {
+      if(err){
+        console.error(err);
+        return res.send(err);
+      }
+      return res.send(results);
+    })
+  },
+
+  getPastResults: function (req, res, next) {
+    db.get_results([], function (err, results) {
+      if(err){
+        console.error(err);
+        return res.send(err);
+      }
+      return res.send(results);
+    })
+  },
 
 }

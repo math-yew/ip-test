@@ -1,8 +1,5 @@
 angular.module('ip')
 .service('mainService', function ($http) {
-  this.test = function () {
-    return $http.get('/api/test');
-  }
 
   this.serviceTest = "service is working";
 
@@ -10,12 +7,12 @@ angular.module('ip')
     return $http.get('/trigger');
   }
 
-  this.startThatComputer = function() {
+  this.startThatComputer = function(thisIp, thatIp) {
     // return $http.get('http://192.168.1.214:3002/client');
 
     return $http({
          method: 'GET',
-         url: 'http://192.168.0.5:3002/client',
+         url: 'http://'+thatIp+':3002/client/'+thisIp,
          withCredentials: true
        })
     .then(function (response) {
@@ -30,8 +27,16 @@ angular.module('ip')
     console.log('posting: ', posting);
     return $http.post('/store', posting)
     .then(function (response) {
+      return response.data[0];
+    });
+  }
+
+  this.getPastResults = function() {
+    console.log('service past: ');
+    return $http.get('/allResults')
+    .then(function (response) {
       return response.data;
-    });;
+    });
   }
 
 

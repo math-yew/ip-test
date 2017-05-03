@@ -28,9 +28,9 @@ app.set('db', massiveServer);
 var db = app.get('db');
 
 var myResult="";
-app.get('/client', function (req, res) {
+app.get('/client/:ip', function (req, res) {
   console.log("starting test");
-  var child = exec("iperf3.exe -c 192.168.0.7", function (error, stdout, stderr) {
+  var child = exec("iperf3.exe -c "+req.params.ip, function (error, stdout, stderr) {
     console.log('stdout: ', stdout);
     console.log('stderr: ', stderr);
     myResult = stdout;
@@ -57,8 +57,9 @@ app.get('/client', function (req, res) {
 });
 
 var serverCtrl = require('./serverCtrl');
-app.get('/api/test', serverCtrl.myTest);
+// app.get('/api/test', serverCtrl.myTest);
 app.post('/store', serverCtrl.storeResults);
+app.get('/allResults', serverCtrl.getPastResults);
 
 /////////////////////////GET IP//////////////////////////////
 

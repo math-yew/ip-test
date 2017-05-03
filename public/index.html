@@ -1,19 +1,103 @@
 <!DOCTYPE html>
 <html ng-app="ip">
   <body ng-controller="ctrl">
-    <h1>testing</h1>
-    {{test}}<br>
+    <!-- <h1>testing</h1>
     {{ctrlTest}}<br>
-    {{serviceTest}}<br>
-    asdf<br>
-    <div ng-repeat="lines in testResults" style="list-style-type:none">
+    {{serviceTest}}<br> -->
+    <!-- <div ng-repeat="lines in testResults" style="list-style-type:none">
       <p>{{lines}}</p>
+    </div> -->
+
+    <div class="">
+      <h1>This Computer</h1>
+      <p>IP Address:</p>
+      <input type="text" name="" value="" ng-model="thisComputer" placeholder="192.168.1.75">
+      <p>Connection:</p>
+      <select>
+        <option value=""></option>
+        <option value="Wireless">Wireless</option>
+        <option value="Ethernet">Ethernet</option>
+        <option value="Other">Other</option>
+      </select>
     </div>
-    <h2>all results:</h2>
-    <p>{{allResults}}</p>
+
+    <div class="">
+      <h1>Other Computer</h1>
+      <p>IP Address:</p>
+      <input type="text" name="" value="" ng-model="thatComputer" placeholder="192.168.1.214">
+      <p>Connection:</p>
+      <select>
+        <option value=""></option>
+        <option value="Wireless">Wireless</option>
+        <option value="Ethernet">Ethernet</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
 
     <button type="button" name="button" ng-click="startThisComputer()">This</button>
     <button type="button" name="button" ng-click="startThatComputer()">That</button>
+
+    <table class="">
+      <caption>Results</caption>
+      <tr>
+        <th></th>
+        <th>Ip Address</th>
+        <th>Interval</th>
+        <th>Transfer</th>
+        <th>Bandwidth</th>
+        <th>Connection</th>
+        <th></th>
+      </tr>
+      <tr>
+        <td>Sender</td>
+        <td>{{currentResults.send_ip}}</td>
+        <td>{{currentResults.send_interval}}</td>
+        <td>{{currentResults.send_transfer}}</td>
+        <td>{{currentResults.send_bandwidth}}</td>
+        <td>{{currentResults.send_connect}}</td>
+        <td>{{currentResults.test_time}}</td>
+      </tr>
+      <tr>
+        <td>Receiver</td>
+        <td>{{currentResults.receive_ip}}</td>
+        <td>{{currentResults.receive_interval}}</td>
+        <td>{{currentResults.receive_transfer}}</td>
+        <td>{{currentResults.receive_bandwidth}}</td>
+        <td>{{currentResults.receive_connect}}</td>
+        <td>{{currentResults.reverse}}</td>
+      </tr>
+    </table>
+
+    <button type="button" name="button" ng-click="getPastResults()">Get Past Results</button>
+    <h2>Past Results:</h2>
+    <table class="" ng-repeat="result in allResults">
+      <caption>{{result.test_time}} <span ng-show={{result.reverse}}>Executed in reverse mode</span></caption>
+      <tr>
+        <th></th>
+        <th>Ip Address</th>
+        <th>Interval</th>
+        <th>Transfer</th>
+        <th>Bandwidth</th>
+        <th>Connection</th>
+      </tr>
+      <tr>
+        <td>Sender</td>
+        <td>{{result.send_ip}}</td>
+        <td>{{result.send_interval}}</td>
+        <td>{{result.send_transfer}}</td>
+        <td>{{result.send_bandwidth}}</td>
+        <td>{{result.send_connect}}</td>
+      </tr>
+      <tr>
+        <td>Receiver</td>
+        <td>{{result.receive_ip}}</td>
+        <td>{{result.receive_interval}}</td>
+        <td>{{result.receive_transfer}}</td>
+        <td>{{result.receive_bandwidth}}</td>
+        <td>{{result.receive_connect}}</td>
+      </tr>
+    </table>
+
   <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
   <script src="./app.js"></script>
   <script src="./ctrl.js"></script>
