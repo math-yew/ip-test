@@ -17,8 +17,8 @@ app.use(function(req, res, next) {
 
   var myResult="";
 app.get('/client', function (req, res) {
-
-  var child = exec("iperf3.exe -c 192.168.1.75", function (error, stdout, stderr) {
+  console.log("starting test");
+  var child = exec("iperf3.exe -c 192.168.0.7", function (error, stdout, stderr) {
     console.log('stdout: ', stdout);
     console.log('stderr: ', stderr);
     myResult = stdout;
