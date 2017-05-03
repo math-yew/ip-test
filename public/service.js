@@ -15,7 +15,7 @@ angular.module('ip')
 
     return $http({
          method: 'GET',
-         url: 'http://192.168.1.214:3002/client',
+         url: 'http://192.168.0.5:3002/client',
          withCredentials: true
        })
     .then(function (response) {
