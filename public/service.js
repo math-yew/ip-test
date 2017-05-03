@@ -19,7 +19,7 @@ angular.module('ip')
          withCredentials: true
        })
     .then(function (response) {
-      console.log('client response', response.data);
+      // console.log('client response', response.data);
       return response.data;
     });
   }

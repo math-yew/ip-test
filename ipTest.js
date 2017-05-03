@@ -63,11 +63,12 @@ app.get('/api/test', serverCtrl.myTest);
 
 var thisIp=0;
 var platform = process.platform;
-if(platform.indexOf("win")>-1){
+console.log('platform: ', platform);
+if(platform.indexOf("win32")>-1){
   var findIp = "ipconfig";
 }
 else{
-  var findIp = "ifconfig en1 inet";
+  var findIp = "ifconfig";
 }
 var findThisIp = exec(findIp, function (error, stdout, stderr) {
   // console.log('Find Ip: ', stderr, stdout);
@@ -82,7 +83,7 @@ function extractIp(str){
   var arr = str.split(" ");
   for (var i = 0; i < arr.length; i++) {
     var dots = arr[i].split(".");
-    if(dots.length===4 && arr[i].indexOf(":")===-1){
+    if(dots.length===4 && arr[i].indexOf(":")===-1 && arr[i] !== "127.0.0.1"){
       myIp = arr[i];
       break;
     }

@@ -18,9 +18,8 @@ angular.module('ip')
     console.log('that clicked: ');
     mainService.startThatComputer()
     .then(function (res) {
-      console.log('res: ', res);
-      var rows = res.replace(/Bytes/g,"Bytesmmmm").replace(/sec/g,"secmmmm").replace(/\[\s+\S+\]\s/g,"");
-      var rows=rows.split("\n");
+      var rows = res.replace(/Bytes/g,"Bytesmmmm").replace(/sec/g,"secmmmm").replace(/\[\s+\S+\]\s/g,"").replace(/\\n/g,"nnnn");
+      var rows=rows.split("nnnn");
       var resultsTable=[];
       var resultsTrue = false;
       for(var i=0;i<rows.length;i++){
