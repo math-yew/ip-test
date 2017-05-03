@@ -24,5 +24,15 @@ angular.module('ip')
     });
   }
 
+  this.storeResults = function(results) {
+    var posting = {};
+    posting.results = results;
+    console.log('posting: ', posting);
+    return $http.post('/store', posting)
+    .then(function (response) {
+      return response.data;
+    });;
+  }
+
 
 })

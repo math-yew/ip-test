@@ -58,6 +58,7 @@ app.get('/client', function (req, res) {
 
 var serverCtrl = require('./serverCtrl');
 app.get('/api/test', serverCtrl.myTest);
+app.post('/store', serverCtrl.storeResults);
 
 /////////////////////////GET IP//////////////////////////////
 

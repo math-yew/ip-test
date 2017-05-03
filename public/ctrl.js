@@ -36,6 +36,12 @@ angular.module('ip')
       }
       $scope.testResults = resultsTable;
       console.log("testResults: ", $scope.testResults)
+      })
+      .then(function (response) {
+        mainService.storeResults($scope.testResults)
+        .then(function (response) {
+          $scope.allResults = response;
+        });;
       });
   }
 
