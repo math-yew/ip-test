@@ -1,6 +1,16 @@
 var app = require('./ipTest.js');
 var db = app.get('db');
 var exec = require('child_process').exec;
+
+var platform = process.platform;
+console.log('platform: ', platform);
+if(platform.indexOf("win32")>-1){
+  var executeServer = "iperf3.exe -s"
+}
+else{
+  var executeServer = "./iperf3 -s"
+}
+
 module.exports = {
   myTest: function (req, res) {
     db.database_call([], function (err, results) {
@@ -14,7 +24,7 @@ module.exports = {
   startServer: function(req, res) {
     var myResult;
     // var child = exec("ls", function (error, stdout, stderr) {
-    var child = exec("./iperf3 -s", function (error, stdout, stderr) {
+    var child = exec(executeServer, function (error, stdout, stderr) {
       console.log('startServer: ', stderr, stdout);
       myResult = stdout;
       if (error !== null) {

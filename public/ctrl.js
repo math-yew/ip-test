@@ -1,6 +1,7 @@
 angular.module('ip')
 .controller('ctrl', function ($scope, mainService) {
-
+  $scope.thisComputer = "192.168.1.75";
+  $scope.thatComputer = "192.168.1.214"; 
   $scope.ctrlTest = "controller is working";
   $scope.serviceTest = mainService.serviceTest;
 

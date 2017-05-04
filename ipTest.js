@@ -27,10 +27,23 @@ var massiveServer = massive.connectSync({
 app.set('db', massiveServer);
 var db = app.get('db');
 
+///////////////////////////////////////////////////////
+
+var platform = process.platform;
+console.log('platform: ', platform);
+if(platform.indexOf("win32")>-1){
+  var findIp = "ipconfig";
+  var executeClient = "iperf3.exe -c "
+}
+else{
+  var findIp = "ifconfig";
+  var executeClient = "./iperf3 -c "
+}
+
 var myResult="";
 app.get('/client/:ip', function (req, res) {
   console.log("starting test");
-  var child = exec("iperf3.exe -c "+req.params.ip, function (error, stdout, stderr) {
+  var child = exec(executeClient + req.params.ip, function (error, stdout, stderr) {
     console.log('stdout: ', stdout);
     console.log('stderr: ', stderr);
     myResult = stdout;
@@ -64,14 +77,7 @@ app.get('/allResults', serverCtrl.getPastResults);
 /////////////////////////GET IP//////////////////////////////
 
 var thisIp=0;
-var platform = process.platform;
-console.log('platform: ', platform);
-if(platform.indexOf("win32")>-1){
-  var findIp = "ipconfig";
-}
-else{
-  var findIp = "ifconfig";
-}
+
 var findThisIp = exec(findIp, function (error, stdout, stderr) {
   // console.log('Find Ip: ', stderr, stdout);
   thisIp=stdout;
