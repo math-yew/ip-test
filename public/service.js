@@ -3,20 +3,27 @@ angular.module('ip')
 
   this.serviceTest = "service is working";
 
+  this.getMyIp = function() {
+    console.log('getting ip: ');
+    return $http.get('/myIp')
+    .then(function (response) {
+      console.log('ip response: ', response);
+      return response.data;
+    });
+  }
+
   this.startThisComputer = function() {
+    console.log('service: start this computer');
     return $http.get('/trigger');
   }
 
   this.startThatComputer = function(thisIp, thatIp) {
-    // return $http.get('http://192.168.1.214:3002/client');
-
     return $http({
-         method: 'GET',
-         url: 'http://'+thatIp+':3002/client/'+thisIp,
-         withCredentials: true
-       })
+       method: 'GET',
+       url: 'http://'+thatIp+':3002/client/'+thisIp,
+       withCredentials: true
+     })
     .then(function (response) {
-      // console.log('client response', response.data);
       return response.data;
     });
   }

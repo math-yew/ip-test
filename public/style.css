@@ -1,0 +1,54 @@
+body{
+  font-family: Helvetica;
+  color: white;
+}
+
+.top {
+  font-family: Georgia;
+  color: #555;
+  text-align: center;
+}
+
+.main{
+  position: relative;
+  width: 100%;
+  min-height: 250px;
+  /*background-color: blue;*/
+  clear: both;
+  float: left;
+  /*border: solid;*/
+}
+
+.red{
+  /*background-color: red;*/
+}
+
+.computer {
+  width: 35%;
+  height: 230px;
+  background-color: darkgrey;
+  position: absolute;
+  border: thick #555 solid;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.left {
+  left: 10%;
+}
+
+.right {
+  left: 55%;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: solid  #222;
+  background-color: #555;
+}
+
+tr, td, td {
+  border: solid thin white;
+  padding:5px;
+}

@@ -1,11 +1,17 @@
 angular.module('ip')
 .controller('ctrl', function ($scope, mainService) {
   $scope.thisComputer = "192.168.1.75";
-  $scope.thatComputer = "192.168.1.214"; 
+  $scope.thatComputer = "192.168.0.5";
   $scope.ctrlTest = "controller is working";
   $scope.serviceTest = mainService.serviceTest;
 
+  mainService.getMyIp()
+  .then(function (res) {
+    $scope.thisComputer = res;
+    });
+
   $scope.startThisComputer = function(){
+    console.log('this clicked: ');
     mainService.startThisComputer()
     .then(function (res) {
       });
