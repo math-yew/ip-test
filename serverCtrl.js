@@ -70,9 +70,14 @@ module.exports = {
   },
 
   startClient: function (req, res) {
+    var reverseMode = "";
+    if(req.query.reverse){
+      console.log('reverse is true: ');
+      var reverseMode = " -R";
+    }
     var myResult="";
     console.log("starting client");
-    var child = exec(executeClient + req.params.ip, function (error, stdout, stderr) {
+    var child = exec(executeClient + req.params.ip + reverseMode, function (error, stdout, stderr) {
       console.log('stdout: ', stdout);
       console.log('stderr: ', stderr);
       myResult = stdout;
@@ -99,9 +104,9 @@ module.exports = {
 
   storeResults: function (req, res) {
     var currentTime=new Date();
-    console.log('req.body.results: ', req.body.results);
+    console.log('req.body: ', req.body);
     // console.log('currentTime: ', currentTime);
-    db.new_result(["1",req.body.results[1][0],req.body.results[1][1],req.body.results[1][2],"2",req.body.results[2][0],req.body.results[2][1],req.body.results[2][2], currentTime, "Other", "Other", false], function (err, results) {
+    db.new_result([req.body.thisComputer,req.body.results[1][0],req.body.results[1][1],req.body.results[1][2],req.body.thatComputer,req.body.results[2][0],req.body.results[2][1],req.body.results[2][2], currentTime, req.body.thisConnection, req.body.thatConnection, req.body.reverse], function (err, results) {
       if(err){
         console.error(err);
         return res.send(err);

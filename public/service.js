@@ -17,10 +17,10 @@ angular.module('ip')
     return $http.get('/trigger');
   }
 
-  this.startThatComputer = function(thisIp, thatIp) {
+  this.startThatComputer = function(thisIp, thatIp, reverse) {
     return $http({
        method: 'GET',
-       url: 'http://'+thatIp+':3002/client/'+thisIp,
+       url: 'http://'+thatIp+':3002/client/'+thisIp+'?reverse:'+reverse,
        withCredentials: true
      })
     .then(function (response) {
@@ -28,9 +28,7 @@ angular.module('ip')
     });
   }
 
-  this.storeResults = function(results) {
-    var posting = {};
-    posting.results = results;
+  this.storeResults = function(posting) {
     console.log('posting: ', posting);
     return $http.post('/store', posting)
     .then(function (response) {

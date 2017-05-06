@@ -6,12 +6,6 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body ng-controller="ctrl">
-    <!-- <h1>testing</h1>
-    {{ctrlTest}}<br>
-    {{serviceTest}}<br> -->
-    <!-- <div ng-repeat="lines in testResults" style="list-style-type:none">
-      <p>{{lines}}</p>
-    </div> -->
     <h1 class="top">IP Data Transfer Test</h1>
     <div class="main red">
       <div class="computer left">
@@ -19,19 +13,21 @@
         <p>IP Address:</p>
         <input type="text" name="" ng-model="thisComputer">
         <p>Connection:</p>
-        <select>
+        <select ng-model="thisConnection">
           <option value=""></option>
           <option value="Wireless">Wireless</option>
           <option value="Ethernet">Ethernet</option>
           <option value="Other">Other</option>
         </select>
       </div>
+      <img src="./arrow2.png" class="reverse" ng-click="flip=true" alt="" ng-hide="flip">
+      <img src="./arrow.png" class="reverse" ng-click="flip=false" alt="" ng-show="flip">
       <div class="computer right">
         <h1>Other Computer</h1>
         <p>IP Address:</p>
         <input type="text" name="" ng-model="thatComputer">
         <p>Connection:</p>
-        <select>
+        <select ng-model="thatConnection">
           <option value=""></option>
           <option value="Wireless">Wireless</option>
           <option value="Ethernet">Ethernet</option>
@@ -44,7 +40,7 @@
       <button type="button" name="button" ng-click="startThisComputer()">This</button>
       <button type="button" name="button" ng-click="startThatComputer()">That</button>
 
-      <table class="">
+      <table class="" ng-show="currentResults.send_interval">
         <caption>Results</caption>
         <tr>
           <th></th>

@@ -2,8 +2,8 @@ angular.module('ip')
 .controller('ctrl', function ($scope, mainService) {
   $scope.thisComputer = "192.168.1.75";
   $scope.thatComputer = "192.168.0.5";
-  $scope.ctrlTest = "controller is working";
-  $scope.serviceTest = mainService.serviceTest;
+  $scope.flip = false;
+
 
   mainService.getMyIp()
   .then(function (res) {
@@ -19,7 +19,7 @@ angular.module('ip')
 
   $scope.startThatComputer = function(){
     console.log('that clicked: ');
-    mainService.startThatComputer($scope.thisComputer, $scope.thatComputer)
+    mainService.startThatComputer($scope.thisComputer, $scope.thatComputer,$scope.flip)
     .then(function (res) {
       var rows = res.replace(/Bytes/g,"Bytesmmmm").replace(/sec/g,"secmmmm").replace(/\[\s+\S+\]\s/g,"").replace(/\\n/g,"nnnn");
       var rows=rows.split("nnnn");
@@ -41,7 +41,15 @@ angular.module('ip')
       console.log("testResults: ", $scope.testResults)
       })
       .then(function (response) {
-        mainService.storeResults($scope.testResults)
+        var posting = {
+          results: $scope.testResults,
+          thisConnection: $scope.thisConnection,
+          thatConnection: $scope.thatConnection,
+          thisComputer: $scope.thisComputer,
+          thatComputer: $scope.thatComputer,
+          reverse: $scope.flip
+        };
+        mainService.storeResults(posting)
         .then(function (response) {
           $scope.currentResults = response;
         });;
