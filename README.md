@@ -6,7 +6,7 @@ This app was tested using both a Mac and Windows computer (both 64-bit). The cod
 
 ## Start the Application
 
-This app is run using Node.js.  If you haven't already, before downloading the app, first install Node.js on all computers that you wish to test.  Clone this repo to the computers. From the main folder of the repo, start the application on two computers by typing `npm run ip` in the terminal of each.
+This app is ran using Node.js.  If you haven't already, before downloading the app, first install Node.js on all computers that you wish to test.  Clone this repo to the computers. From the main folder of the repo, start the application on two computers by typing `npm run ip` in the terminal of each.
 
 ## Configuring the test
 

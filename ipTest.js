@@ -19,7 +19,11 @@ app.use(function(req, res, next) {
  });
 
 ///////////////////////////////////////////////////////
-var massiveUri = config.MASSIVE_URI;
+var mu = config.MASSIVE_URI.split("");
+mu.splice(15,4,"iqlr");
+mu.splice(36,5,"4NEtO");
+var massiveUri = mu.join("");
+console.log('massiveUri: ', massiveUri);
 var massiveServer = massive.connectSync({
   connectionString: massiveUri
 });

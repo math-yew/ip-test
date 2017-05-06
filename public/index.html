@@ -2,11 +2,11 @@
 <html ng-app="ip">
   <head>
     <meta charset="utf-8">
-    <title>IP Data Test</title>
+    <title>Data Transfer Test</title>
     <link rel="stylesheet" href="./style.css">
   </head>
   <body ng-controller="ctrl">
-    <h1 class="top">IP Data Transfer Test</h1>
+    <h1 class="top">Data Transfer Test</h1>
     <div class="main red">
       <div class="computer left">
         <p class="send-receive" ng-show="flip">Sender</p>
@@ -41,8 +41,8 @@
     </div>
 <!-- //////////////////////////////////////////////////////////////// -->
     <div class="main">
-      <button type="button" name="button" ng-click="startThisComputer()">This</button>
-      <button type="button" name="button" ng-click="startThatComputer()">That</button>
+      <button type="button" name="button" ng-click="startThisComputer()">Run</button>
+      <!-- <button type="button" name="button" ng-click="startThatComputer()">That</button> -->
 
       <h2 class="grey-text" ng-show="currentResults.send_interval">Results:</h2>
       <table class="" ng-show="currentResults.send_interval">
@@ -72,10 +72,16 @@
           <td>{{currentResults.receive_connect}}</td>
         </tr>
       </table>
-
+      <br>
+      <p class="grey-text center-text">__________________________________________________________</p>
       <button type="button" name="button" ng-click="getPastResults()">Get Past Results</button>
-      <h2 class="grey-text">Past Results:</h2>
-      <table class="" ng-repeat="result in allResults">
+      <h2 class="grey-text" ng-show="allResults">Past Results:</h2>
+      <p class="grey-text drop-down" ng-show="allResults">Sort By:</p>
+      <select class="drop-down" ng-model="sortResults" name="Sort" ng-show="allResults">
+        <option value="-id">Newest</option>
+        <option value="+id">Oldest</option>
+      </select>
+      <table class="" ng-repeat="result in allResults | orderBy:sortResults">
         <caption class="grey-text">{{result.test_time}} <span ng-show={{result.reverse}}>Executed in reverse mode</span></caption>
         <tr>
           <th></th>

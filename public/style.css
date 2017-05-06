@@ -64,6 +64,17 @@ h2 {
   left: 54%;
 }
 
+.drop-down {
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.center-text{
+  text-align: center;
+}
+
 table {
   margin: 0 auto;
   border: solid  #333;
@@ -74,4 +85,18 @@ table {
 tr, td, td {
   border: solid thin white;
   padding:5px;
+}
+
+button {
+  padding: 10px;
+  font-size: 25px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
+button:hover {
+  background-color: #ddd;
+  border: thin solid #333;
+  color:#333;
 }

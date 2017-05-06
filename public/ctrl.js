@@ -10,11 +10,20 @@ angular.module('ip')
     $scope.thisComputer = res;
     });
 
+  $scope.canRun = true;
+
   $scope.startThisComputer = function(){
     console.log('this clicked: ');
-    mainService.startThisComputer()
-    .then(function (res) {
+    if($scope.canRun){
+      mainService.startThisComputer()
+      .then(function (res) {
+        $scope.canRun = false;
+        $scope.startThatComputer()
       });
+    }
+    else{
+    $scope.startThatComputer()
+    }
   }
 
   $scope.startThatComputer = function(){

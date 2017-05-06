@@ -18,7 +18,6 @@ else{
 module.exports = {
 
   getMyIp: function (req, res, next) {
-    console.log('getting ip: ');
     var thisIp=0;
     var findThisIp = exec(findIp, function (error, stdout, stderr) {
       thisIp=stdout;
@@ -45,7 +44,6 @@ module.exports = {
       console.log('waiting for ip: ',count);
       if(thisIp){
         extractIp(thisIp);
-        console.log('myIp: ', myIp);
         clearInterval(this);
       }
       if(count>60){
@@ -71,9 +69,7 @@ module.exports = {
 
   startClient: function (req, res) {
     var reverseMode = "";
-    console.log('req.query: ', req.query);
     if(req.query.reverse==="true" || req.query.reverse==="TRUE"){
-      console.log('reverse is true: ');
       var reverseMode = " -R";
 
     }
@@ -115,8 +111,6 @@ module.exports = {
     }
     var date = new Date();
     var currentTime = date.toLocaleDateString() + " "+ date.toLocaleTimeString();
-    console.log('req.body: ', req.body);
-    // console.log('currentTime: ', currentTime);
     db.new_result([sender,req.body.results[1][0],req.body.results[1][1],req.body.results[1][2],receiver,req.body.results[2][0],req.body.results[2][1],req.body.results[2][2], currentTime, req.body.thisConnection, req.body.thatConnection, req.body.reverse], function (err, results) {
       if(err){
         console.error(err);
@@ -127,7 +121,6 @@ module.exports = {
   },
 
   getPastResults: function (req, res, next) {
-    console.log('past from server controller: ');
     db.get_results([], function (err, results) {
       if(err){
         console.error(err);
