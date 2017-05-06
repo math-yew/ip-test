@@ -18,9 +18,10 @@ angular.module('ip')
   }
 
   this.startThatComputer = function(thisIp, thatIp, reverse) {
+    console.log('reverse: ', reverse);
     return $http({
        method: 'GET',
-       url: 'http://'+thatIp+':3002/client/'+thisIp+'?reverse:'+reverse,
+       url: 'http://'+thatIp+':3002/client/'+thisIp+'?reverse='+reverse,
        withCredentials: true
      })
     .then(function (response) {

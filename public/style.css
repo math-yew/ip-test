@@ -3,6 +3,10 @@ body{
   color: white;
 }
 
+h2 {
+  text-align: center;
+}
+
 .top {
   font-family: Georgia;
   color: #555;
@@ -29,6 +33,11 @@ body{
   width: 100px;
 }
 
+.send-receive {
+  margin: 0px;
+  padding: 0px;
+}
+
 .red{
   /*background-color: red;*/
 }
@@ -43,19 +52,23 @@ body{
   text-align: center;
 }
 
+.grey-text {
+  color: #444;
+}
+
 .left {
   left: 10%;
 }
 
 .right {
-  left: 55%;
+  left: 54%;
 }
 
 table {
   margin: 0 auto;
-  border-collapse: collapse;
-  border: solid  #222;
+  border: solid  #333;
   background-color: #555;
+  margin-bottom: 15px;
 }
 
 tr, td, td {

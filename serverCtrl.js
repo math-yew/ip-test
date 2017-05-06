@@ -71,9 +71,11 @@ module.exports = {
 
   startClient: function (req, res) {
     var reverseMode = "";
-    if(req.query.reverse){
+    console.log('req.query: ', req.query);
+    if(req.query.reverse==="true" || req.query.reverse==="TRUE"){
       console.log('reverse is true: ');
       var reverseMode = " -R";
+
     }
     var myResult="";
     console.log("starting client");
@@ -103,10 +105,19 @@ module.exports = {
   },
 
   storeResults: function (req, res) {
-    var currentTime=new Date();
+    if(req.body.reverse){
+      var receiver = req.body.thatComputer;
+      var sender = req.body.thisComputer;
+    }
+    else{
+      var receiver = req.body.thisComputer;
+      var sender = req.body.thatComputer;
+    }
+    var date = new Date();
+    var currentTime = date.toLocaleDateString() + " "+ date.toLocaleTimeString();
     console.log('req.body: ', req.body);
     // console.log('currentTime: ', currentTime);
-    db.new_result([req.body.thisComputer,req.body.results[1][0],req.body.results[1][1],req.body.results[1][2],req.body.thatComputer,req.body.results[2][0],req.body.results[2][1],req.body.results[2][2], currentTime, req.body.thisConnection, req.body.thatConnection, req.body.reverse], function (err, results) {
+    db.new_result([sender,req.body.results[1][0],req.body.results[1][1],req.body.results[1][2],receiver,req.body.results[2][0],req.body.results[2][1],req.body.results[2][2], currentTime, req.body.thisConnection, req.body.thatConnection, req.body.reverse], function (err, results) {
       if(err){
         console.error(err);
         return res.send(err);
@@ -116,6 +127,7 @@ module.exports = {
   },
 
   getPastResults: function (req, res, next) {
+    console.log('past from server controller: ');
     db.get_results([], function (err, results) {
       if(err){
         console.error(err);

@@ -9,10 +9,12 @@
     <h1 class="top">IP Data Transfer Test</h1>
     <div class="main red">
       <div class="computer left">
+        <p class="send-receive" ng-show="flip">Sender</p>
+        <p class="send-receive" ng-hide="flip">Receiver</p>
         <h1>This Computer</h1>
-        <p>IP Address:</p>
+        <p class="grey-text">IP Address:</p>
         <input type="text" name="" ng-model="thisComputer">
-        <p>Connection:</p>
+        <p class="grey-text">Connection:</p>
         <select ng-model="thisConnection">
           <option value=""></option>
           <option value="Wireless">Wireless</option>
@@ -20,13 +22,15 @@
           <option value="Other">Other</option>
         </select>
       </div>
-      <img src="./arrow2.png" class="reverse" ng-click="flip=true" alt="" ng-hide="flip">
-      <img src="./arrow.png" class="reverse" ng-click="flip=false" alt="" ng-show="flip">
+      <img src="./arrow.png" class="reverse" ng-click="flip=true" alt="" ng-hide="flip">
+      <img src="./arrow2.png" class="reverse" ng-click="flip=false" alt="" ng-show="flip">
       <div class="computer right">
+        <p class="send-receive" ng-show="flip">Receiver</p>
+        <p class="send-receive" ng-hide="flip">Sender</p>
         <h1>Other Computer</h1>
-        <p>IP Address:</p>
+        <p class="grey-text">IP Address:</p>
         <input type="text" name="" ng-model="thatComputer">
-        <p>Connection:</p>
+        <p class="grey-text">Connection:</p>
         <select ng-model="thatConnection">
           <option value=""></option>
           <option value="Wireless">Wireless</option>
@@ -35,13 +39,14 @@
         </select>
       </div>
     </div>
-
+<!-- //////////////////////////////////////////////////////////////// -->
     <div class="main">
       <button type="button" name="button" ng-click="startThisComputer()">This</button>
       <button type="button" name="button" ng-click="startThatComputer()">That</button>
 
+      <h2 class="grey-text" ng-show="currentResults.send_interval">Results:</h2>
       <table class="" ng-show="currentResults.send_interval">
-        <caption>Results</caption>
+        <caption class="grey-text">{{currentResults.test_time}}<span ng-show="currentResults.reverse">Executed in reverse mode</span></caption>
         <tr>
           <th></th>
           <th>Ip Address</th>
@@ -49,7 +54,6 @@
           <th>Transfer</th>
           <th>Bandwidth</th>
           <th>Connection</th>
-          <th></th>
         </tr>
         <tr>
           <td>Sender</td>
@@ -58,7 +62,6 @@
           <td>{{currentResults.send_transfer}}</td>
           <td>{{currentResults.send_bandwidth}}</td>
           <td>{{currentResults.send_connect}}</td>
-          <td>{{currentResults.test_time}}</td>
         </tr>
         <tr>
           <td>Receiver</td>
@@ -67,14 +70,13 @@
           <td>{{currentResults.receive_transfer}}</td>
           <td>{{currentResults.receive_bandwidth}}</td>
           <td>{{currentResults.receive_connect}}</td>
-          <td>{{currentResults.reverse}}</td>
         </tr>
       </table>
 
       <button type="button" name="button" ng-click="getPastResults()">Get Past Results</button>
-      <h2>Past Results:</h2>
+      <h2 class="grey-text">Past Results:</h2>
       <table class="" ng-repeat="result in allResults">
-        <caption>{{result.test_time}} <span ng-show={{result.reverse}}>Executed in reverse mode</span></caption>
+        <caption class="grey-text">{{result.test_time}} <span ng-show={{result.reverse}}>Executed in reverse mode</span></caption>
         <tr>
           <th></th>
           <th>Ip Address</th>
