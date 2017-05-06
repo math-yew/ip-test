@@ -4,7 +4,6 @@ angular.module('ip')
   this.serviceTest = "service is working";
 
   this.getMyIp = function() {
-    console.log('getting ip: ');
     return $http.get('/myIp')
     .then(function (response) {
       console.log('ip response: ', response);
@@ -18,7 +17,6 @@ angular.module('ip')
   }
 
   this.startThatComputer = function(thisIp, thatIp, reverse) {
-    console.log('reverse: ', reverse);
     return $http({
        method: 'GET',
        url: 'http://'+thatIp+':3002/client/'+thisIp+'?reverse='+reverse,
@@ -30,7 +28,6 @@ angular.module('ip')
   }
 
   this.storeResults = function(posting) {
-    console.log('posting: ', posting);
     return $http.post('/store', posting)
     .then(function (response) {
       return response.data[0];
@@ -38,7 +35,6 @@ angular.module('ip')
   }
 
   this.getPastResults = function() {
-    console.log('service past: ');
     return $http.get('/allResults')
     .then(function (response) {
       return response.data;

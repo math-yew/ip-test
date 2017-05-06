@@ -1,7 +1,7 @@
 angular.module('ip')
 .controller('ctrl', function ($scope, mainService) {
-  $scope.thisComputer = "192.168.1.75";
-  $scope.thatComputer = "192.168.0.5";
+  $scope.thisComputer = "";
+  $scope.thatComputer = "";
   $scope.flip = false;
 
 
@@ -13,7 +13,6 @@ angular.module('ip')
   $scope.canRun = true;
 
   $scope.startThisComputer = function(){
-    console.log('this clicked: ');
     if($scope.canRun){
       mainService.startThisComputer()
       .then(function (res) {
@@ -27,7 +26,6 @@ angular.module('ip')
   }
 
   $scope.startThatComputer = function(){
-    console.log('that clicked: ');
     mainService.startThatComputer($scope.thisComputer, $scope.thatComputer,$scope.flip)
     .then(function (res) {
       var rows = res.replace(/Bytes/g,"Bytesmmmm").replace(/sec/g,"secmmmm").replace(/\[\s+\S+\]\s/g,"").replace(/\\n/g,"nnnn");
@@ -47,7 +45,6 @@ angular.module('ip')
         }
       }
       $scope.testResults = resultsTable;
-      console.log("testResults: ", $scope.testResults)
       })
       .then(function (response) {
         var posting = {
@@ -66,7 +63,6 @@ angular.module('ip')
   }
 
   $scope.getPastResults = function(){
-    console.log('contrl past: ');
     mainService.getPastResults()
     .then(function (response) {
         $scope.allResults = response;
